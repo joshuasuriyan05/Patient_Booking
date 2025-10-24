@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: patient-booking-deployment
+  labels:
+    app: patient-booking
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: patient-booking
+  template:
+    metadata:
+      labels:
+        app: patient-booking
+    spec:
+      containers:
+      - name: patient-booking-container
+        image: joshuaz05/patient-booking-app:latest
+        ports:
+        - containerPort: 8080
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        imagePullPolicy: Always
